@@ -291,7 +291,7 @@ function chooseRepo {
   echo "What HTML source would you like to build from?"
   echo
   echo "1) Use an existing clone on my local filesystem."
-  echo "2) Create a clone from https://github.com/whatwg/html."
+  echo "2) Create a clone from https://github.com/imhele/html."
   echo "3) Create a clone from an existing fork, by GitHub username."
   echo "4) Create a clone from an existing fork, by custom URL."
   echo "5) Quit"
@@ -305,7 +305,7 @@ function chooseRepo {
     fi
     confirmRepo
   elif [[ $choice == "2" ]]; then
-    HTML_REPO=https://github.com/whatwg/html.git
+    HTML_REPO=https://github.com/imhele/html.git
     confirmRepo
   elif [[ $choice == "3" ]]; then
     echo
@@ -323,7 +323,7 @@ function chooseRepo {
       confirmRepo
     else
       echo
-      echo "Before proceeding, first go to https://github.com/whatwg/html and create a fork."
+      echo "Before proceeding, first go to https://github.com/imhele/html and create a fork."
       exit
     fi
   elif [[ $choice == "4" ]]; then
@@ -439,21 +439,21 @@ function relativePath {
 # Arguments: none
 # Output: A web server with the build output will be running inside the Docker container
 function doDockerBuild {
-  # Ensure whatwg/wattsi:latest is up to date. Without this, the locally cached copy would be used,
+  # Ensure imhele/wattsi:latest is up to date. Without this, the locally cached copy would be used,
   # i.e. once Wattsi was downloaded once, it would never update. Note that this is fast
   # (zero-transfer) if the locally cached copy is already up to date.
   DOCKER_PULL_ARGS=()
   $QUIET && DOCKER_PULL_ARGS+=( --quiet )
-  DOCKER_PULL_ARGS+=( whatwg/wattsi:latest )
+  DOCKER_PULL_ARGS+=( imhele/wattsi:latest )
   docker pull "${DOCKER_PULL_ARGS[@]}"
 
-  DOCKER_BUILD_ARGS=( --tag whatwg-html )
+  DOCKER_BUILD_ARGS=( --tag imhele-html )
   $QUIET && DOCKER_BUILD_ARGS+=( --quiet )
   docker build "${DOCKER_BUILD_ARGS[@]}" .
 
   DOCKER_RUN_ARGS=()
   $SERVE && DOCKER_RUN_ARGS+=( --publish "$SERVE_PORT:$SERVE_PORT" )
-  DOCKER_RUN_ARGS+=( whatwg-html )
+  DOCKER_RUN_ARGS+=( imhele-html )
   $QUIET && DOCKER_RUN_ARGS+=( --quiet )
   $VERBOSE && DOCKER_RUN_ARGS+=( --verbose )
   $DO_UPDATE || DOCKER_RUN_ARGS+=( --no-update )
@@ -465,9 +465,9 @@ function doDockerBuild {
   # Pass in the html-build SHA (since there's no .git directory inside the container)
   docker run --rm --interactive --tty \
              --env "BUILD_SHA_OVERRIDE=$(git rev-parse HEAD)" \
-             --mount "type=bind,source=$HTML_SOURCE,destination=/whatwg/html-build/html,readonly=1" \
-             --mount "type=bind,source=$HTML_CACHE,destination=/whatwg/html-build/.cache" \
-             --mount "type=bind,source=$HTML_OUTPUT,destination=/whatwg/html-build/output" \
+             --mount "type=bind,source=$HTML_SOURCE,destination=/imhele/html-build/html,readonly=1" \
+             --mount "type=bind,source=$HTML_CACHE,destination=/imhele/html-build/.cache" \
+             --mount "type=bind,source=$HTML_OUTPUT,destination=/imhele/html-build/output" \
              "${DOCKER_RUN_ARGS[@]}"
 }
 

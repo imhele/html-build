@@ -11,9 +11,9 @@ jobs:
     name: Build
     runs-on: ubuntu-20.04
     env:
-      IMAGE_NAME: whatwg/html-build
+      IMAGE_NAME: imhele/html-build
     steps:
-    - name: Checkout whatwg/html-build
+    - name: Checkout imhele/html-build
       uses: actions/checkout@v2
       with:
         fetch-depth: 0
@@ -23,13 +23,13 @@ jobs:
         shellcheck ci-build/*.sh
     - name: Docker build
       run: ci-build/docker-build.sh
-    - name: Checkout whatwg/html
+    - name: Checkout imhele/html
       uses: actions/checkout@v2
       with:
-        repository: whatwg/html
+        repository: imhele/html
         path: html
         fetch-depth: 2
-    - name: Test against whatwg/html
+    - name: Test against imhele/html
       run: |
         mkdir output
         bash ci-build/docker-run.sh "$GITHUB_WORKSPACE/html" output

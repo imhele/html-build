@@ -22,11 +22,11 @@ function main {
   cd "$TMP_DIR"
   trap cleanTemp EXIT
 
-  local docker_hub_repo="whatwg/html-build"
+  local docker_hub_repo="imhele/html-build"
 
   # Build the Docker image, using Docker Hub as a cache. (This will be fast if nothing has changed
   # in html-build or its dependencies).
-  docker pull whatwg/wattsi
+  docker pull imhele/wattsi
   docker pull ptspts/pdfsizeopt
   docker pull "$docker_hub_repo" || true
   docker build --cache-from "$docker_hub_repo" --tag "$docker_hub_repo" .

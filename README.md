@@ -1,15 +1,15 @@
 # HTML Build Tools
 
-This repository contains the tools and instructions necessary for building the [HTML Standard](https://html.spec.whatwg.org/multipage/) from its [source](https://github.com/whatwg/html).
+This repository contains the tools and instructions necessary for building the [HTML Standard](https://html.spec.whatwg.org/multipage/) from its [source](https://github.com/imhele/html).
 
 ## Getting set up
 
 Make sure you have `git` installed on your system, and you are using a Bash shell. (On Windows, `cmd.exe` will not work, but the Git Bash shell that comes with [Git for Windows](https://git-for-windows.github.io/) works nicely.)
 
-Then, clone this ([html-build](https://github.com/whatwg/html-build)) repo:
+Then, clone this ([html-build](https://github.com/imhele/html-build)) repo:
 
 ```bash
-git clone https://github.com/whatwg/html-build.git && cd html-build
+git clone https://github.com/imhele/html-build.git && cd html-build
 ```
 
 You then have a decision to make as to how you want to do your builds: locally, on your computer, or using a [Docker](https://www.docker.com/) container. We suggest going the Docker route if and only if you are already comfortable with Docker.
@@ -22,7 +22,7 @@ To build locally, you'll need the following commands installed on your system:
 
 - `curl`, `grep`, `perl`, `unzip`
 
-Optionally, for faster builds, you can install [Wattsi](https://github.com/whatwg/wattsi) and Python 3.7+ (necessary for applying syntax highlighting to `pre` contents). If you don't bother with that, the build will use [Wattsi Server](https://github.com/domenic/wattsi-server), which requires an internet connection.
+Optionally, for faster builds, you can install [Wattsi](https://github.com/imhele/wattsi) and Python 3.7+ (necessary for applying syntax highlighting to `pre` contents). If you don't bother with that, the build will use [Wattsi Server](https://github.com/domenic/wattsi-server), which requires an internet connection.
 
 ### Running the build
 
@@ -32,7 +32,7 @@ Run the `build.sh` script from inside your `html-build` working directory, like 
 ./build.sh
 ```
 
-The first time this runs, it will look up for the HTML source from a `../html` folder, if it exists. Otherwise, it may ask for your input on where to clone the HTML source from, or where on your system to find it if you've already done that. If you're working to submit a pull request to [whatwg/html](https://github.com/whatwg/html), be sure to give it the URL of your fork.
+The first time this runs, it will look up for the HTML source from a `../html` folder, if it exists. Otherwise, it may ask for your input on where to clone the HTML source from, or where on your system to find it if you've already done that. If you're working to submit a pull request to [imhele/html](https://github.com/imhele/html), be sure to give it the URL of your fork.
 
 You may also set the environment variable `$HTML_SOURCE` to use a custom location for the HTML source. For example:
 
